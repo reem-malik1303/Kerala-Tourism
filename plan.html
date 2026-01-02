@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kerala Tourism - Plan Your Trip</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin:0; background:#f2f7f5; }
+        header { background-image:url("Wayanad.jpg");background-size:cover; background-position:center;  color:black; padding:30px; text-align:center; }
+h1{font-family:'Fantasy'; font-size:60px;}
+        nav { background:#C6E2B5; padding:10px; text-align:center; }
+        nav a { color:black; text-decoration:none; margin:0 15px; font-weight:bold; }
+        nav a:hover { text-decoration:underline; }
+
+        .plan-container { background:white; margin:20px; padding:20px; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); max-width:700px; margin-left:auto; margin-right:auto; }
+
+        h2 { color:black; text-align:center; }
+        label { display:block; margin-top:15px; font-weight:bold; }
+        input, select, textarea { width:100%; padding:8px; margin-top:5px; border-radius:5px; border:1px solid #ccc; }
+        button { margin-top:15px; padding:10px 15px; background:#C6E2B5; color:black; border:none; border-radius:5px; cursor:pointer; }
+        button:hover { background:#C6E2B5; }
+
+
+
+        .user-plan { margin-top:20px; padding:15px; background:#e0f2f1; border-radius:5px; white-space:pre-line; }
+        .checkbox-group { margin-top:10px; }
+        .checkbox-group label { display:inline-block; margin-right:10px; font-weight:normal; }
+
+        footer { background:#C6E2B5; color:black; text-align:center; padding:10px; margin-top:20px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Plan Your Paradies!</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="categories.html">Places to visit</a>
+    
+</nav>
+
+<div class="plan-container">
+    <h2>Create Your Personalized Plan</h2>
+
+    <form id="tripForm">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <label for="days">Number of Days:</label>
+        <select id="days" required>
+            <option value="">Select days</option>
+            <option value="1">1 Day</option>
+            <option value="2">2 Days</option>
+            <option value="3">3 Days</option>
+            <option value="4">4 Days</option>
+            <option value="5">5 Days</option>
+        </select>
+
+        <label>Places you want to visit:</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" value="Munnar"> Munnar</label>
+            <label><input type="checkbox" value="Echo Point"> Echo Point</label>
+            <label><input type="checkbox" value="Top Station"> Top Station</label>
+            <label><input type="checkbox" value="Alleppey"> Alleppey</label>
+            <label><input type="checkbox" value="Alleppey Beach"> Alleppey Beach</label>
+            <label><input type="checkbox" value="Varkala Beach"> Varkala Beach</label>
+            <label><input type="checkbox" value="Athirappilly Waterfalls"> Athirappilly Waterfalls</label>
+            <label><input type="checkbox" value="Wayanad"> Wayanad</label>
+            <label><input type="checkbox" value="Edakkal Caves"> Edakkal Caves</label>
+            <label><input type="checkbox" value="Pookode Lake"> Pookode Lake</label>
+            <label><input type="checkbox" value="Soochipara Waterfalls"> Soochipara Waterfalls</label>
+        </div>
+
+        <label for="preferences">Preferences (optional):</label>
+        <textarea id="preferences" rows="3" placeholder="E.g., Beach, Hill Station, Wildlife, Food, Relaxation"></textarea>
+
+        <button type="submit">Generate Plan</button>
+
+    </form>
+
+    <div id="userPlan" class="user-plan" style="display:none;">
+        <h3>Your Personalized Trip Plan:</h3>
+        <p id="planOutput"></p>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('tripForm');
+    const planDiv = document.getElementById('userPlan');
+    const planOutput = document.getElementById('planOutput');
+
+    const placeTimings = {
+        "Munnar": "8:30 AM - 6:00 PM",
+        "Echo Point": "9:00 AM - 1:00 PM",
+        "Top Station": "2:00 PM - 4:00 PM",
+        "Alleppey": "7:00 AM - 12:00 PM (Houseboat)",
+        "Alleppey Beach": "12:30 PM - 2:00 PM",
+        "Varkala Beach": "6:00 AM - 8:00 AM",
+        "Athirappilly Waterfalls": "11:00 AM - 2:00 PM",
+        "Wayanad": "8:00 AM - 5:00 PM",
+        "Edakkal Caves": "8:00 AM - 11:00 AM",
+        "Pookode Lake": "11:30 AM - 1:00 PM",
+        "Soochipara Waterfalls": "2:00 PM - 4:00 PM"
+    };
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const days = parseInt(document.getElementById('days').value);
+        const preferences = document.getElementById('preferences').value;
+
+        // Get selected checkboxes
+        const selectedPlaces = Array.from(document.querySelectorAll('.checkbox-group input:checked'))
+            .map(cb => cb.value);
+
+        if(selectedPlaces.length === 0) {
+            alert("Please select at least one place to visit.");
+            return;
+        }
+
+        const placesPerDay = Math.ceil(selectedPlaces.length / days);
+        let planText = `Hello ${name}!\nHere is your ${days}-day Kerala trip plan:\n\n`;
+
+        if(preferences) {
+            planText += `Preferences: ${preferences}\n\n`;
+        }
+
+        for(let i = 0; i < days; i++) {
+            planText += `Day ${i+1}:\n`;
+            const start = i * placesPerDay;
+            const end = start + placesPerDay;
+            const dayPlaces = selectedPlaces.slice(start, end);
+
+            dayPlaces.forEach(place => {
+                const timing = placeTimings[place] || "Timing not available";
+                planText += `  - Visit ${place} (${timing})\n`;
+            });
+
+            if(dayPlaces.length === 0) {
+                planText += "  Free time / Relax\n";
+            }
+            planText += "\n";
+        }
+
+        planText += "Tips:\n- Start early to avoid crowds.\n- Carry water and snacks.\n- Check local opening hours in advance.";
+
+        planOutput.textContent = planText;
+        planDiv.style.display = 'block';
+    });
+</script>
+
+
+<footer>
+    <p>@2025 Kerala Tourism | Designed for Educational Purpose</p>
+</footer>
+
+</body>
+</html>

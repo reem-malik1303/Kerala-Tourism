@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kerala Tourism - Places</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin:0; background:#f2f7f5; }
+        header { background:#C6E2B5; color:black; padding:20px; text-align:center; }
+h1{font-family:'Fantasy'; font-size:40px;}
+
+        nav { background:#C6E2B5; padding:10px; text-align:center; }
+        nav a { color:black; text-decoration:none; margin:0 15px; font-weight:bold; }
+        nav a:hover { text-decoration:underline; }
+#category{display:none;padding:20px;}
+.category { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; padding:20px; }
+        .category-card { background:white; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); overflow:hidden; }
+.category-card:hover{tranform:scale(1.05)}
+        .category-card img { width:100%; height:200px; object-fit:cover; }
+.category-card h2 { color:black; margin-bottom:8px; }
+#places{display:none;padding:20px;}
+        .place-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; padding:20px; }
+        .place-card { background:white; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); overflow:hidden; }
+        .place-card img { width:100%; height:200px; object-fit:cover; }
+        .place-info { padding:15px; }
+        .place-info h2 { color:black; margin-bottom:8px; }
+        .place-info p, li { font-size:14px; margin:5px 0; }
+        .place-info ul { padding-left:18px; }
+        .place-info a { display:inline-block; margin-top:10px; padding:8px 12px; background:#C6E2B5; color:black; text-decoration:none; border-radius:5px; font-size:14px; }
+        .place-info a:hover { background:#C6E2B5; }
+        footer { background:#C6E2B5; color:black; text-align:center; padding:10px; margin-top:20px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Tourist Places in Kerala</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="places.html">Tourism Places</a>
+    <a href="plan.html">Travel Plan</a>
+</nav>
+
+<div class="category">
+
+    <!-- Munnar -->
+    <div class="category-card" onclick="showPlaces('hillstation')>
+        <img src="munnar.jpeg" alt="hillsation">
+
+        <div class="category-info">
+            <h3><u>Hill Station</u></h3>
+            </div>
+    </div>
+</div>
+<div class="places"></div>
+<script>
+const data={
+hillstation;[{
+name:"Munnar",fee:"100",img:"munnar.jpeg",map:"https://www.google.com/maps?q=munnar" target="_blank"}]
+};
+function showPlaces(type){categories.style.display="none";
+places.style.display="block";
+data[typle].forEach(p=>{html+='
+    <div class="place-card">
+       <img src="${p.img}">
+        <div class="place-info">
+
+            <h2><u>"${p.name}"</u></h2>
+            <p><strong>Timing:</strong> 6:00 AM to 5:00 PM</p>
+            <p><strong>Entry Fee:</strong> "${p.fee}"</p>
+            
+                
+<a href=""${p.map}"" target="_blank">View Location</a>
+        </div>
+    </div>'});
+html+='</dive>';
+places.innerHTML=html;
+}
+</script>
+<!-- Wayanad -->
+    <div class="place-card">
+        <img src="Wayanad.jpg" alt="Wayanad">
+        <div class="place-info">
+            <h2><u>Wayanad</u></h2>
+            <p><strong>Timing:</strong> 8:00 AM to 5:00 PM</p>
+            <p><strong>Entry Fee:</strong> 100 (Wildlife Sanctuary)</p>
+            <p>Hill district with forests, waterfalls and wildlife.</p>
+            <p><strong>Nearby Restaurants:</strong></p>
+            <ul>
+                <li>Wilton Restaurant</li>
+                <li>Udupi Restaurant</li>
+                <li>1980¡¯s A Nostalgic Restaurant</li>
+            </ul>
+            <a href="https://www.google.com/maps?q=wayanad" target="_blank">View Location</a>
+        </div>
+    </div>
+<!-- Thekkady -->
+    <div class="place-card">
+        <img src="thekkady.jpeg" alt="Thekkady">
+        <div class="place-info">
+            <h2><u>Thekkady (Periyar Wildlife Sanctuary)</u></h2>
+            <p><strong>Timing:</strong> 6:00 AM - 6:00 PM</p>
+            <p><strong>Entry Fee:</strong>rs.45 ( Adults)</p>
+            <p>Thekkady is home to Periyar Wildlife Sanctuary, known for elephants and rich biodiversity.</p>
+            <p><strong>Nearby Restaurants:</strong></p>
+            <ul>
+                <li>Bamboo Cafe</li>
+                <li>Spice Garden Restaurant</li>
+<li>Ebony's Cafe</li>
+            </ul>
+            <a href="https://www.google.com/maps?q=thekkady" target="_blank">View Location</a>
+        </div>
+    </div>
+
+
+
+
+    <!-- Alleppey -->
+    <div class="place-card">
+        <img src="Alleppey_Alappuzha.jpeg" alt="Alleppey">
+        <div class="place-info">
+            <h2><u>Alleppey (Alappuzha)</u></h2>
+            <p><strong>Timing:</strong> All Day</p>
+            <p><strong>Entry Fee:</strong> Free (Boat ride extra)</p>
+            <p>Known for beautiful backwaters and houseboats.</p>
+            <p><strong>Nearby Restaurants:</strong></p>
+            <ul>
+                <li>Thaff Restaurant</li>
+                <li>Indian Coffee House</li>
+                <li>Cassia Restaurant</li>
+            </ul>
+            <a href="https://www.google.com/maps?q=alappuzha" target="_blank">View Location</a>
+        </div>
+    </div>
+
+    <!-- Varkala -->
+    <div class="place-card">
+        <img src="Varkala_Beach.jpeg" alt="Varkala Beach">
+        <div class="place-info">
+            <h2>Varkala Beach</h2>
+            <p><strong>Timing:</strong> 6:00 AM to 7:00 PM</p>
+            <p><strong>Entry Fee:</strong> Free</p>
+            <p>Only cliff beach in Kerala with scenic views.</p>
+            <p><strong>Nearby Restaurants:</strong></p>
+            <ul>
+                <li>Darjeeling Cafe</li>
+                <li>God's Own Country Kitchen</li>
+                <li>Clafouti Restaurant</li>
+            </ul>
+            <a href="https://www.google.com/maps?q=varkala+beach" target="_blank">View Location</a>
+        </div>
+    </div>
+
+    
+
+    <!-- Athirappilly -->
+    <div class="place-card">
+        <img src="Athirappilly_Waterfalls.jpeg" alt="Athirappilly">
+        <div class="place-info">
+            <h2><u>Athirappilly Waterfalls</u></h2>
+            <p><strong>Timing:</strong> 8:00 AM to 6:00 PM</p>
+            <p><strong>Entry Fee:</strong> 40</p>
+            <p>Largest waterfall in Kerala.</p>
+            <p><strong>Nearby Restaurants:</strong></p>
+            <ul>
+                <li>Athirappilly Green Trees Restaurant</li>
+                <li>Rainforest Restaurant</li>
+            </ul>
+            <a href="https://www.google.com/maps?q=athirappilly+waterfalls" target="_blank">View Location</a>
+        </div>
+    </div>
+
+<!-- Kulathupuzha Forest Museum -->
+    <div class="place-card">
+        <img src="forest.jpeg" alt="Kulathupuzha Forest Museum">
+        <div class="place-info">
+            <h2><u>Kulathupuzha Forest Museum</u></h2>
+            <p><strong>Timing:</strong> 10:00 AM - 6:00 PM (Closed on Mondays)</p>
+            <p><strong>Entry Fee:</strong>rs.30 (Adults), rs.10 (Children)</p>
+            <p>Kerala's first forest museum, showcasing biodiversity, wildlife, and forest resources.</p>
+            <p><strong>Nearby Restaurants:</strong></p>
+            <ul>
+               
+                <li>Local restaurants in Kollam town</li>
+            </ul>
+            <a href="https://www.google.com/maps?q=kulathupuzha+forest+museum" target="_blank">View Location</a>
+        </div>
+    </div>
+<!-- Snehatheeram Beach -->
+    <div class="place-card">
+        <img src="beach.jpg" alt="Snehatheeram Beach">
+        <div class="place-info">
+            <h2><u>Snehatheeram Beach</u></h2>
+            <p><strong>Timing:</strong> Open all day</p>
+            <p><strong>Entry Fee:</strong>rs.10 (Park area)</p>
+            <p>Known as Love Shore, this beach is maintained by the Kerala Tourism Department.</p>
+            <p><strong>Nearby Restaurants:</strong></p>
+            <ul>
+                
+                <li>Local seafood shops and beach cafes</li>
+            </ul>
+            <a href="https://www.google.com/maps?q=snehatheeram+beach" target="_blank">View Location</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p> @2026 Kerala Tourism | Designed for Educational Purpose</p>
+</footer>
+
+</body>
+</html>
+
+

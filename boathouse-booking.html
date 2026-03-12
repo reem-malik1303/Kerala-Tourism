@@ -4,12 +4,14 @@
 <title>Boat House Booking</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 </head>
 
 <body>
 
 <section class="container mt-5">
+
 <h2 class="text-center mb-4">Boat House Booking</h2>
 
 <form id="bookingForm">
@@ -17,23 +19,17 @@
 <div class="form-group">
 <label>Name</label>
 <input type="text" class="form-control"
-placeholder="Enter your name"
-pattern="[A-Za-z\s]{3,30}"
-title="Name should contain only letters (3-30 characters)"
-required>
+pattern="[A-Za-z\s]{3,30}" required>
 </div>
 
 <div class="form-group mt-3">
 <label>Email</label>
-<input type="email" class="form-control"
-placeholder="Enter email"
-required>
+<input type="email" class="form-control" required>
 </div>
 
 <div class="form-group mt-3">
 <label>Phone</label>
 <input type="tel" class="form-control"
-placeholder="Enter phone number"
 pattern="^(\+91[\-\s]?)?[0]?[6-9]\d{9}$"
 required>
 </div>
@@ -55,58 +51,73 @@ required>
 
 <div class="form-group mt-3">
 <label>Number of Persons</label>
-<input type="number" class="form-control"
-min="1" max="10"
-required>
+<input type="number" class="form-control" min="1" max="10" required>
 </div>
 
-<!-- Advance Payment -->
 <div class="form-group mt-3">
-<label>Advance Payment (30%)</label>
-<input type="text" id="advanceAmount" class="form-control" readonly>
+<label>Total Amount</label>
+<input type="text" id="totalAmount" class="form-control" readonly>
 </div>
 
-<!-- Payment Method -->
-<div class="form-group mt-3">
-<label>Payment Method</label>
-<select class="form-control" required>
-<option value="">Select Payment</option>
-<option>UPI</option>
-<option>Credit Card</option>
-<option>Debit Card</option>
-<option>Net Banking</option>
-</select>
-</div>
-
-<button type="submit" class="btn btn-primary mt-4">
-Pay Advance & Book
+<button type="button" class="btn btn-success mt-4" onclick="generateQR()">
+Generate QR Code
 </button>
 
 </form>
+
+<div class="text-center mt-5">
+
+<h4>Scan QR to Pay</h4>
+
+<div id="qrcode"></div>
+
+<br>
+
+<p>Scan using Google Pay / PhonePe / Paytm</p>
+
+<button class="btn btn-primary" onclick="confirmBooking()">
+I Have Paid
+</button>
+
+</div>
+
 </section>
 
 <script>
 
-const boatType = document.getElementById("boatType");
-const advanceAmount = document.getElementById("advanceAmount");
+let amount = 0;
 
-boatType.addEventListener("change", function(){
+document.getElementById("boatType").addEventListener("change", function(){
 
-let price = this.value;
+amount = this.value;
+document.getElementById("totalAmount").value = "₹ " + amount;
 
-if(price){
-let advance = price * 0.30;
-advanceAmount.value = "₹ " + advance;
-}else{
-advanceAmount.value = "";
+});
+
+function generateQR(){
+
+if(amount == 0){
+alert("Please select boat type");
+return;
 }
 
+let upiLink = "upi://pay?pa=8072350187@upi&pn=BoatBooking&am=" + amount + "&cu=INR";
+
+document.getElementById("qrcode").innerHTML = "";
+
+new QRCode(document.getElementById("qrcode"), {
+text: upiLink,
+width: 220,
+height: 220
 });
 
-document.getElementById("bookingForm").addEventListener("submit", function(e){
-e.preventDefault();
-alert("Booking submitted! Please complete the advance payment.");
-});
+}
+
+function confirmBooking(){
+
+alert("Payment received! Your Boat House booking request has been submitted.");
+
+}
 
 </script>
 

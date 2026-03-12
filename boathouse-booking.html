@@ -89,7 +89,7 @@ let advanceAmount = 0;  // 30% advance
 // Update price and calculate advance when boat type is selected
 document.getElementById("boatType").addEventListener("change", function(){
     price = this.value;
-    advanceAmount = Math.round(price * 0.30); // 30% of price
+    advanceAmount = Math.round(price * 0.01); // 30% of price
     document.getElementById("totalAmount").value = "₹ " + advanceAmount + " (Advance Payment)";
 });
 
@@ -121,6 +121,7 @@ function confirmBooking(){
 </script>
 </body>
 </html>
+
 
 
 

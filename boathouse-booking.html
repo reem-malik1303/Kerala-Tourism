@@ -88,10 +88,8 @@ I Have Paid
 let amount = 0;
 
 document.getElementById("boatType").addEventListener("change", function(){
-
 amount = this.value;
 document.getElementById("totalAmount").value = "₹ " + amount;
-
 });
 
 function generateQR(){
@@ -101,8 +99,7 @@ alert("Please select boat type");
 return;
 }
 
-let upiLink = "upi://pay?pa=8072350187@upi&pn=BoatBooking&am=" + amount + "&cu=INR";
-
+let upiLink = "upi://pay?pa=reemamalik1303-1@okbi&pn=BoatHouseBooking&am=" + amount + "&cu=INR";
 document.getElementById("qrcode").innerHTML = "";
 
 new QRCode(document.getElementById("qrcode"), {
@@ -114,12 +111,11 @@ height: 220
 }
 
 function confirmBooking(){
-
-alert("Payment received! Your Boat House booking request has been submitted.");
-
+alert("Payment successful! Your boat booking request has been submitted.");
 }
 
 </script>
 
 </body>
 </html>
+

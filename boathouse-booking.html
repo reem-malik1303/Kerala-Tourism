@@ -27,8 +27,6 @@ required>
 <label>Email</label>
 <input type="email" class="form-control"
 placeholder="Enter email"
-pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-title="Enter a valid email address"
 required>
 </div>
 
@@ -37,17 +35,16 @@ required>
 <input type="tel" class="form-control"
 placeholder="Enter phone number"
 pattern="^(\+91[\-\s]?)?[0]?[6-9]\d{9}$"
-title="Enter a valid Indian phone number (Example: 9876543210 or +91 9876543210)"
 required>
 </div>
 
 <div class="form-group mt-3">
 <label>Select Boat Type</label>
-<select class="form-control" required>
+<select class="form-control" id="boatType" required>
 <option value="">Select Boat</option>
-<option>Luxury Houseboat</option>
-<option>Premium Houseboat</option>
-<option>Standard Houseboat</option>
+<option value="12000">Luxury Houseboat - ₹12000</option>
+<option value="8000">Premium Houseboat - ₹8000</option>
+<option value="5000">Standard Houseboat - ₹5000</option>
 </select>
 </div>
 
@@ -63,18 +60,54 @@ min="1" max="10"
 required>
 </div>
 
+<!-- Advance Payment -->
+<div class="form-group mt-3">
+<label>Advance Payment (30%)</label>
+<input type="text" id="advanceAmount" class="form-control" readonly>
+</div>
+
+<!-- Payment Method -->
+<div class="form-group mt-3">
+<label>Payment Method</label>
+<select class="form-control" required>
+<option value="">Select Payment</option>
+<option>UPI</option>
+<option>Credit Card</option>
+<option>Debit Card</option>
+<option>Net Banking</option>
+</select>
+</div>
+
 <button type="submit" class="btn btn-primary mt-4">
-Book Now
+Pay Advance & Book
 </button>
 
 </form>
 </section>
 
 <script>
+
+const boatType = document.getElementById("boatType");
+const advanceAmount = document.getElementById("advanceAmount");
+
+boatType.addEventListener("change", function(){
+
+let price = this.value;
+
+if(price){
+let advance = price * 0.30;
+advanceAmount.value = "₹ " + advance;
+}else{
+advanceAmount.value = "";
+}
+
+});
+
 document.getElementById("bookingForm").addEventListener("submit", function(e){
 e.preventDefault();
-alert("Your Boat House booking request has been submitted!");
+alert("Booking submitted! Please complete the advance payment.");
 });
+
 </script>
 
 </body>

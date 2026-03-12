@@ -85,41 +85,40 @@ I Have Paid
 
 <script>
 
-let price = 0;
-let advanceAmount = 0;
+let amount = 0;
 
 document.getElementById("boatType").addEventListener("change", function(){
-
-price = this.value;
-
-advanceAmount = Math.round(price * 0.30); // 30% advance
-
-document.getElementById("totalAmount").value = "₹ " + advanceAmount + " (Advance Payment)";
-
+amount = this.value;
+document.getElementById("totalAmount").value = "₹ " + amount;
 });
 
 function generateQR(){
 
-if(price == 0){
+if(amount == 0){
 alert("Please select boat type");
 return;
 }
 
-let upi = "upi://pay?pa=reemamalik1303-1@oksbi&pn=BoatHouseBooking&am=" + advanceAmount + "&cu=INR";
+let upiLink = "upi://pay?pa=reemamalik1303-1@okbi&pn=BoatHouseBooking&am=" + amount + "&cu=INR";
 
-let qrURL = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(upi);
+document.getElementById("qrcode").innerHTML = "";
 
-document.getElementById("qrImage").src = qrURL;
+new QRCode(document.getElementById("qrcode"), {
+text: upiLink,
+width: 220,
+height: 220
+});
 
 }
 
 function confirmBooking(){
-alert("Advance payment submitted! Your booking request is received.");
+alert("Payment successful! Your boat booking request has been submitted.");
 }
 
 </script>
 </body>
 </html>
+
 
 
 
